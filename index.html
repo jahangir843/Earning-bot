@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CashReward App</title>
     
-    <!-- Your New Ad Code -->
-<script src='//libtl.com/sdk.js' data-zone='9523358' data-sdk='show_9523358'></script>
+    <!-- Monetag SDK -->
+    <script src='//libtl.com/sdk.js' data-zone='9523358' data-sdk='show_9523358'></script>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -55,7 +55,7 @@
                 <p class="text-center text-gray-400">Don't have an account? <a href="#" id="show-signup" class="font-semibold text-accent">Sign Up</a></p>
             </div>
             <div id="signup-view" class="hidden">
-                 <input id="signup-name" type="text" placeholder="Full Name" class="w-full p-3 rounded-lg input-field mb-4">
+                <input id="signup-name" type="text" placeholder="Full Name" class="w-full p-3 rounded-lg input-field mb-4">
                 <input id="signup-email" type="email" placeholder="Email" class="w-full p-3 rounded-lg input-field mb-4">
                 <input id="signup-password" type="password" placeholder="Password" class="w-full p-3 rounded-lg input-field mb-4">
                 <button id="signup-btn" class="w-full p-3 rounded-lg btn-accent mb-4">Sign Up</button>
@@ -104,9 +104,14 @@
                             <div class="flex items-center space-x-3"><span class="text-3xl"></span><div><h3 class="font-semibold">Click for Reward</h3><p class="text-xs text-gray-400">Rewarded Popup</p></div></div>
                             <button class="bg-white text-black font-bold px-6 py-2 rounded-lg text-sm btn" onclick="claimReward('popup')">Claim</button>
                         </div>
-                         <div class="card-bg p-3 rounded-lg flex items-center justify-between">
+                        <div class="card-bg p-3 rounded-lg flex items-center justify-between">
                             <div class="flex items-center space-x-3"><span class="text-3xl"></span><div><h3 class="font-semibold">Watch a Video</h3><p class="text-xs text-gray-400">In-App Interstitial</p></div></div>
                             <button class="bg-gray-700 text-white font-bold px-6 py-2 rounded-lg text-sm btn" onclick="claimReward('inApp')">Start</button>
+                            
+                        </div>
+                        <div class="card-bg p-3 rounded-lg flex items-center justify-between">
+                            <div class="flex items-center space-x-3"><span class="text-3xl"></span><div><h3 class="font-semibold">Watch Link</h3><p class="text-xs text-gray-400">Open Link for Reward</p></div></div>
+                            <button class="bg-gray-700 text-white font-bold px-6 py-2 rounded-lg text-sm btn" onclick="claimReward('watchLink')" data-link="https://otieu.com/4/9467271">Start</button>
                         </div>
                         <div class="card-bg p-3 rounded-lg flex items-center justify-between">
                             <div class="flex items-center space-x-3"><span class="text-3xl"></span><div><h3 class="font-semibold">Play Mini App</h3><p class="text-xs text-gray-400">Get a big reward!</p></div></div>
@@ -137,21 +142,21 @@
 
             <!-- Refer Page -->
             <div id="refer-page" class="p-4 space-y-6 sub-page">
-                 <h2 class="text-xl font-bold text-center">Refer & Earn</h2>
-                 <div class="card-bg p-6 rounded-lg text-center">
-                     <p class="text-gray-400 mb-2">Your Referral Code</p>
-                     <div class="bg-gray-800 p-3 rounded-lg flex items-center justify-center mb-4">
-                         <span id="referral-code" class="text-2xl font-bold tracking-widest">LOADING...</span>
-                         <button id="copy-code-btn" class="ml-4"><i data-lucide="copy" class="w-6 h-6 text-gray-400"></i></button>
-                     </div>
-                     <p class="text-sm text-gray-300">Share the code with your friends.</p>
-                 </div>
-                 <button id="share-btn" class="w-full p-3 rounded-lg btn-accent">Share Your Code</button>
-                 <div class="card-bg p-4 rounded-lg mt-6">
+                <h2 class="text-xl font-bold text-center">Refer & Earn</h2>
+                <div class="card-bg p-6 rounded-lg text-center">
+                    <p class="text-gray-400 mb-2">Your Referral Code</p>
+                    <div class="bg-gray-800 p-3 rounded-lg flex items-center justify-center mb-4">
+                        <span id="referral-code" class="text-2xl font-bold tracking-widest">LOADING...</span>
+                        <button id="copy-code-btn" class="ml-4"><i data-lucide="copy" class="w-6 h-6 text-gray-400"></i></button>
+                    </div>
+                    <p class="text-sm text-gray-300">Share the code with your friends.</p>
+                </div>
+                <button id="share-btn" class="w-full p-3 rounded-lg btn-accent">Share Your Code</button>
+                <div class="card-bg p-4 rounded-lg mt-6">
                     <h3 class="font-semibold mb-3 text-center">Have a Referral Code?</h3>
                     <input id="enter-referral-code" type="text" placeholder="Enter code here" class="w-full p-3 rounded-lg input-field mb-3">
                     <button id="apply-referral-btn" class="w-full p-3 rounded-lg btn-outline-accent">Apply Code</button>
-                 </div>
+                </div>
             </div>
 
             <!-- Profile Page -->
@@ -189,14 +194,14 @@
 
     <script type="module">
         const firebaseConfig = {
-  apiKey: "AIzaSyBGxkAn5cvonDx8I1BlbyAGZ-FCF8DfJWk",
-  authDomain: "paisa-earning-boy.firebaseapp.com",
-  databaseURL: "https://paisa-earning-boy-default-rtdb.firebaseio.com",
-  projectId: "paisa-earning-boy",
-  storageBucket: "paisa-earning-boy.firebasestorage.app",
-  messagingSenderId: "289692513827",
-  appId: "1:289692513827:web:832b42bb2e5b11664e2396"
-};
+            apiKey: "AIzaSyBGxkAn5cvonDx8I1BlbyAGZ-FCF8DfJWk",
+            authDomain: "paisa-earning-boy.firebaseapp.com",
+            databaseURL: "https://paisa-earning-boy-default-rtdb.firebaseio.com",
+            projectId: "paisa-earning-boy",
+            storageBucket: "paisa-earning-boy.firebasestorage.app",
+            messagingSenderId: "289692513827",
+            appId: "1:289692513827:web:832b42bb2e5b11664e2396"
+        };
         
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
         import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
@@ -265,11 +270,17 @@
                 } else {
                     const ownReferralCode = Math.random().toString(36).substring(2, 8).toUpperCase();
                     const defaultUserData = {
-                        uid: currentUser.uid, name: currentUser.displayName || currentUser.email.split('@')[0], email: currentUser.email,
-                        balance: 50, referralCode: ownReferralCode, referredBy: null,
+                        uid: currentUser.uid,
+                        name: currentUser.displayName || currentUser.email.split('@')[0],
+                        email: currentUser.email,
+                        balance: 50,
+                        referralCode: ownReferralCode,
+                        referredBy: null,
                         lastNotificationCheck: new Date(),
                         createdAt: serverTimestamp(),
-                        dailyAdCount: 0, lastAdWatchDate: new Date().toISOString().split('T')[0], isBlocked: false
+                        dailyAdCount: 0,
+                        lastAdWatchDate: new Date().toISOString().split('T')[0],
+                        isBlocked: false
                     };
                     await setDoc(userRef, defaultUserData);
                     userData = defaultUserData;
@@ -284,7 +295,13 @@
             const configRef = doc(db, "config", "main");
             try {
                 const configSnap = await getDoc(configRef);
-                appConfig = configSnap.exists() ? configSnap.data() : { minWithdrawal: 5000, paymentMethods: ["UPI", "bKash"], dailyAdLimit: 10, coinValueCoins: 1000, coinValueInr: 10 };
+                appConfig = configSnap.exists() ? configSnap.data() : {
+                    minWithdrawal: 5000,
+                    paymentMethods: ["UPI", "bKash"],
+                    dailyAdLimit: 10,
+                    coinValueCoins: 1000,
+                    coinValueInr: 10
+                };
             } catch (error) {
                 console.error("Error fetching app config:", error);
             }
@@ -299,7 +316,7 @@
             profileEmailEl.textContent = userData.email || 'No Email';
             referralCodeEl.textContent = userData.referralCode || '...';
             minWithdrawalInfoEl.textContent = `${appConfig.minWithdrawal || 5000} Coins`;
-            coinValueInfoEl.textContent = `${appConfig.coinValueCoins || 100} Coins = Tk{appConfig.coinValueInr || 10}`;
+            coinValueInfoEl.textContent = `${appConfig.coinValueCoins || 100} Coins = Tk${appConfig.coinValueInr || 10}`;
             withdrawMethodSelect.innerHTML = '';
             (appConfig.paymentMethods || []).forEach(method => {
                 const option = document.createElement('option');
@@ -344,8 +361,16 @@
         window.navigateTo = navigateTo;
 
         function setupEventListeners() {
-            document.getElementById('show-signup').addEventListener('click', (e) => { e.preventDefault(); document.getElementById('login-view').classList.add('hidden'); document.getElementById('signup-view').classList.remove('hidden'); });
-            document.getElementById('show-login').addEventListener('click', (e) => { e.preventDefault(); document.getElementById('signup-view').classList.add('hidden'); document.getElementById('login-view').classList.remove('hidden'); });
+            document.getElementById('show-signup').addEventListener('click', (e) => {
+                e.preventDefault();
+                document.getElementById('login-view').classList.add('hidden');
+                document.getElementById('signup-view').classList.remove('hidden');
+            });
+            document.getElementById('show-login').addEventListener('click', (e) => {
+                e.preventDefault();
+                document.getElementById('signup-view').classList.add('hidden');
+                document.getElementById('login-view').classList.remove('hidden');
+            });
             document.getElementById('signup-btn').addEventListener('click', handleSignup);
             document.getElementById('login-btn').addEventListener('click', handleLogin);
             document.getElementById('logout-btn').addEventListener('click', handleLogout);
@@ -357,7 +382,10 @@
                     navigateTo(pageId);
                 });
             });
-            document.getElementById('notification-bell').addEventListener('click', () => { navigateTo('notifications-page'); loadNotifications(); });
+            document.getElementById('notification-bell').addEventListener('click', () => {
+                navigateTo('notifications-page');
+                loadNotifications();
+            });
             document.getElementById('copy-code-btn').addEventListener('click', copyReferralCode);
             document.getElementById('share-btn').addEventListener('click', shareReferralCode);
             document.getElementById('withdraw-btn').addEventListener('click', handleWithdrawal);
@@ -397,7 +425,9 @@
             }
         }
 
-        async function handleLogout() { await signOut(auth); }
+        async function handleLogout() {
+            await signOut(auth);
+        }
         
         async function checkNewNotifications() {
             const lastCheck = userData.lastNotificationCheck;
@@ -484,15 +514,16 @@
                     await updateDoc(referrerRef, { balance: (referrerData.balance || 0) + 100 });
                     const newUserRef = doc(db, "users", currentUser.uid);
                     await updateDoc(newUserRef, { balance: (userData.balance || 0) + 100, referredBy: referrerCode });
-                    userData.balance += 100; userData.referredBy = referrerCode;
+                    userData.balance += 100;
+                    userData.referredBy = referrerCode;
                     updateUI();
-                    if(isManualApply) showAlert("Code applied successfully! You have received 100 coins.");
+                    if (isManualApply) showAlert("Code applied successfully! You have received 100 coins.");
                 } else {
-                    if(isManualApply) showAlert("Invalid referral code.");
+                    if (isManualApply) showAlert("Invalid referral code.");
                 }
-            } catch(error) {
+            } catch (error) {
                 console.error("Error applying referral bonus: ", error);
-                if(isManualApply) showAlert("Error applying code.");
+                if (isManualApply) showAlert("Error applying code.");
             }
         }
 
@@ -521,8 +552,14 @@
             try {
                 await updateBalance(-amount);
                 await addDoc(collection(db, "withdrawals"), {
-                    userId: currentUser.uid, userName: userData.name, userEmail: userData.email,
-                    amount: amount, method: method, paymentDetail: paymentDetail, status: "pending", requestedAt: serverTimestamp()
+                    userId: currentUser.uid,
+                    userName: userData.name,
+                    userEmail: userData.email,
+                    amount: amount,
+                    method: method,
+                    paymentDetail: paymentDetail,
+                    status: "pending",
+                    requestedAt: serverTimestamp()
                 });
                 showAlert("Withdrawal request submitted successfully!");
                 document.getElementById('withdraw-amount').value = '';
@@ -560,50 +597,166 @@
             const today = new Date().toISOString().split('T')[0];
             const userRef = doc(db, "users", currentUser.uid);
 
+            // Reset daily ad count if it's a new day
             if (userData.lastAdWatchDate !== today) {
                 await updateDoc(userRef, { dailyAdCount: 0, lastAdWatchDate: today });
                 userData.dailyAdCount = 0;
                 userData.lastAdWatchDate = today;
             }
 
-            if (userData.dailyAdCount >= (appConfig.dailyAdLimit || 10)) {
+            // Check daily ad limit for ad-based tasks
+            if (['interstitial', 'popup', 'miniApp'].includes(taskType) && userData.dailyAdCount >= (appConfig.dailyAdLimit || 10)) {
                 return showAlert("You have reached your daily ad watch limit.");
             }
-            
-            if (typeof window.show_9523358 !== 'function') {
+
+            // Verify ad SDK for ad-based tasks
+            if (['interstitial', 'popup', 'miniApp'].includes(taskType) && typeof window.show_9523358 !== 'function') {
+                console.error("Monetag SDK not loaded: show_9523358 is undefined");
                 return showAlert("Ad service is currently unavailable. Please try again later.");
             }
-            
+
             let adPromise;
+            let adsWatched = 0;
+            const maxAdsInSequence = 2; // For miniApp: show 2 ads
             loader.style.display = 'flex';
+
             try {
-                 switch(taskType) {
-                    case 'interstitial': adPromise = window.show_9523358(); break;
-                    case 'popup': adPromise = window.show_9523358('pop'); break;
-                    case 'inApp': adPromise = window.show_9523358({ type: 'inApp', inAppSettings: { frequency: 2, capping: 0.1, interval: 30, timeout: 5, everyPage: false } }); break;
-                    case 'miniApp': adPromise = window.show_9523358(); break;
-                    default: return;
-                }
-                
-                await adPromise;
+                switch(taskType) {
+                    case 'interstitial':
+                        console.log("Triggering interstitial ad");
+                        adPromise = window.show_9523358();
+                        await adPromise;
+                        adsWatched++;
+                        userData.dailyAdCount = (userData.dailyAdCount || 0) + 1;
+                        await updateDoc(userRef, { dailyAdCount: userData.dailyAdCount });
+                        await addDoc(collection(db, "adViews"), {
+                            userId: currentUser.uid,
+                            taskType: 'interstitial',
+                            adNumber: adsWatched,
+                            viewedAt: serverTimestamp()
+                        });
+                        await updateBalance(5);
+                        showAlert("Congratulations! You have won 5 coins.");
+                        break;
 
-                const newCount = (userData.dailyAdCount || 0) + 1;
-                await updateDoc(userRef, { dailyAdCount: newCount });
-                userData.dailyAdCount = newCount;
-                
-                let rewardAmount = 0;
-                if (taskType === 'miniApp') rewardAmount = 10;
-                else if (taskType !== 'inApp') rewardAmount = 5;
+                    case 'popup':
+                        console.log("Triggering popup ad");
+                        adPromise = window.show_9523358('pop');
+                        await adPromise;
+                        adsWatched++;
+                        userData.dailyAdCount = (userData.dailyAdCount || 0) + 1;
+                        await updateDoc(userRef, { dailyAdCount: userData.dailyAdCount });
+                        await addDoc(collection(db, "adViews"), {
+                            userId: currentUser.uid,
+                            taskType: 'popup',
+                            adNumber: adsWatched,
+                            viewedAt: serverTimestamp()
+                        });
+                        await updateBalance(5);
+                        showAlert("Congratulations! You have won 5 coins.");
+                        break;
 
-                if (rewardAmount > 0) {
-                    await updateBalance(rewardAmount);
-                    showAlert(`Congratulations! You have won ${rewardAmount} coins.`);
+                    case 'inApp':
+                        const inAppButton = document.querySelector(`button[onclick="claimReward('inApp')"]`);
+                        const inAppLink = inAppButton.dataset.link;
+                        console.log("Attempting to open inApp link:", inAppLink);
+                        if (inAppLink) {
+                            const newWindow = window.open(inAppLink, '_blank');
+                            if (!newWindow) {
+                                showAlert("Please allow popups to open the video link.");
+                                return;
+                            }
+                            await addDoc(collection(db, "linkClicks"), {
+                                userId: currentUser.uid,
+                                taskType: 'inApp',
+                                link: inAppLink,
+                                clickedAt: serverTimestamp()
+                            });
+                            await updateBalance(5);
+                            showAlert("Video link opened! You have won 5 coins.");
+                        } else {
+                            console.warn("No link provided for inApp task");
+                            showAlert("No video link available. Please try again later.");
+                            return;
+                        }
+                        break;
+
+                    case 'watchLink':
+                        const watchLinkButton = document.querySelector(`button[onclick="claimReward('watchLink')"]`);
+                        const watchLink = watchLinkButton.dataset.link;
+                        console.log("Attempting to open watchLink:", watchLink);
+                        if (watchLink) {
+                            const newWindow = window.open(watchLink, '_blank');
+                            if (!newWindow) {
+                                showAlert("Please allow popups to open the link.");
+                                return;
+                            }
+                            await addDoc(collection(db, "linkClicks"), {
+                                userId: currentUser.uid,
+                                taskType: 'watchLink',
+                                link: watchLink,
+                                clickedAt: serverTimestamp()
+                            });
+                            await updateBalance(5);
+                            showAlert("Link opened! You have won 5 coins.");
+                        } else {
+                            console.warn("No link provided for watchLink task");
+                            showAlert("No link available. Please try again later.");
+                            return;
+                        }
+                        break;
+
+                    case 'miniApp':
+                        // First ad
+                        console.log("Triggering miniApp ad 1");
+                        adPromise = window.show_9523358();
+                        await adPromise;
+                        adsWatched++;
+                        userData.dailyAdCount = (userData.dailyAdCount || 0) + 1;
+                        await updateDoc(userRef, { dailyAdCount: userData.dailyAdCount });
+                        await addDoc(collection(db, "adViews"), {
+                            userId: currentUser.uid,
+                            taskType: 'miniApp',
+                            adNumber: adsWatched,
+                            viewedAt: serverTimestamp()
+                        });
+
+                        // Check if another ad can be shown
+                        if (userData.dailyAdCount < (appConfig.dailyAdLimit || 10) && adsWatched < maxAdsInSequence) {
+                            console.log("Triggering miniApp ad 2");
+                            await new Promise(resolve => setTimeout(resolve, 1000)); // 1-second delay
+                            adPromise = window.show_9523358();
+                            await adPromise;
+                            adsWatched++;
+                            userData.dailyAdCount = (userData.dailyAdCount || 0) + 1;
+                            await updateDoc(userRef, { dailyAdCount: userData.dailyAdCount });
+                            await addDoc(collection(db, "adViews"), {
+                                userId: currentUser.uid,
+                                taskType: 'miniApp',
+                                adNumber: adsWatched,
+                                viewedAt: serverTimestamp()
+                            });
+                        }
+
+                        // Award coins only if both ads were watched
+                        if (adsWatched >= maxAdsInSequence) {
+                            await updateBalance(10);
+                            showAlert(`Congratulations! You have won 10 coins after watching ${adsWatched} ads.`);
+                        } else {
+                            showAlert(`Only ${adsWatched} ad(s) watched. You need to watch ${maxAdsInSequence} ads to earn 10 coins.`);
+                        }
+                        break;
+
+                    default:
+                        console.warn("Unknown task type:", taskType);
+                        return;
                 }
+
                 updateAdsLeftCount();
 
-            } catch(e) {
-                console.error("Ad error:", e);
-                showAlert('Could not show ad. Please try again later.');
+            } catch (e) {
+                console.error(`Error in ${taskType} task:`, e);
+                showAlert("Could not complete task. Please try again later.");
             } finally {
                 loader.style.display = 'none';
             }
@@ -620,5 +773,4 @@
 
     </script>
 </body>
-
 </html>
